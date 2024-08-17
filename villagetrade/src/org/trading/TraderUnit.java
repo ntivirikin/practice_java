@@ -13,13 +13,12 @@ public abstract class TraderUnit implements Trader {
     Integer priceLumber;
     Double logConvRate;
 
-    public TraderUnit(String initName, Integer initGold, Integer initLogs, Integer initPriceLogs, Integer initLumber, Double initLogConvRate) {
+    public TraderUnit(String initName, Integer initGold, Integer initLogs, Integer initPriceLogs, Integer initLumber) {
         name = initName;
         numGold = initGold;
         numLogs = initLogs;
         priceLogs = initPriceLogs;
         numLumber = initLumber;
-        logConvRate = initLogConvRate;
     }
 
     // Name getter
