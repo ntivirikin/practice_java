@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.trading.TraderUnit;
 import org.trading.Village;
+import org.trading.Town;
 
 public class TraderCreator {
 
@@ -21,9 +22,18 @@ public class TraderCreator {
     }
 
     // Add other methods here that will create Village, Town or City based on random numbers/names
-    public TraderUnit createTraderUnit() {
+    public TraderUnit createTraderUnit(String traderType) {
 
-        // Placeholder
-        return new Village("", 0, 0, 0, 0);
+        // Select from village names and parameters
+        if (traderType == "village") {
+            Village newTrader = new Village("Colbrington", 500, 50, 3, 25);
+        } else if (traderType == "town") {
+            Town newTrader = new Town("Townsend", 500, 25, 25, 25);
+        } else if (traderType == "city") {
+            City newTrader = new City("Appleville", 1000, 100, 5, 80);
+        }
+
+        return newTrader;
+
     }
 }

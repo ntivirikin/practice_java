@@ -14,10 +14,13 @@ public interface Trader {
     // Retrieve price of logs
     public Integer getLogPrice();
 
+    // Retrieve conversion rate for logs
+    public Double getLogConvRate();
+
     // Retrieve number of lumber
     public Integer getLumber();
 
-    // Convert logs to lumber based on type of Trader
+    // Convert logs to lumber
     public void convertLogs(Integer convLogs);
 
     // Declare info about Trader

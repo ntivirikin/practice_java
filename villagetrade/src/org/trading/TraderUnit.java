@@ -7,8 +7,20 @@ public abstract class TraderUnit implements Trader {
     Integer numGold;
     Integer numLogs;
     Integer numLumber;
+
+    // Change these to a map of objects eventually, with own variables
     Integer priceLogs;
     Integer priceLumber;
+    Double logConvRate;
+
+    public TraderUnit(String initName, Integer initGold, Integer initLogs, Integer initPriceLogs, Integer initLumber, Double initLogConvRate) {
+        name = initName;
+        numGold = initGold;
+        numLogs = initLogs;
+        priceLogs = initPriceLogs;
+        numLumber = initLumber;
+        logConvRate = initLogConvRate;
+    }
 
     // Name getter
     @Override
@@ -56,6 +68,18 @@ public abstract class TraderUnit implements Trader {
         return;
     }
 
+    // Conversion rate logs getter
+    @Override
+    public Double getLogConvRate() {
+        return this.logConvRate;
+    }
+
+    // Conversion rate log setter
+    protected void setLogConvRate(Double newLogConvRate) {
+        this.logConvRate = newLogConvRate;
+        return;
+    }
+
     // Num lumber getter
     @Override
     public Integer getLumber() {
@@ -66,6 +90,21 @@ public abstract class TraderUnit implements Trader {
     protected void setLumber(Integer newLumber) {
         this.numLumber = newLumber;
         return;
+    }
+
+    // Convert logs to lumber
+    public void convertLogs(Integer convLogs) {
+
+        // This section needs to use Exceptions
+        if (convLogs > this.getLogs()) {
+            System.out.println("There are not enough logs to convert!");
+            return;
+        }
+
+        this.setLogs(this.getLogs() - convLogs);
+        int tempLumber = (int)(convLogs * logConvRate);
+        this.setLumber(this.getLumber() + tempLumber);
+
     }
 
 }
