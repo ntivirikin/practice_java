@@ -1,4 +1,6 @@
-public class Account {
+package accountsys.src.org;
+
+public class Account extends Balance {
 
     String accHolder;
     Integer accValue;
@@ -25,5 +27,11 @@ public class Account {
         this.accValue = newAccValue;
         return;
     }
-    
+
+    @Override
+    public void printInfo() {
+        System.out.println("The account holder and account balance are:");
+        System.out.println(this.getAccHolder());
+        System.out.println(this.getAccValue().toString());
+    }
 }
