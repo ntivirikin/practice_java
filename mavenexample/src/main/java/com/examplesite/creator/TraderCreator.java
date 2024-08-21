@@ -1,11 +1,11 @@
-package org.creator;
+package com.examplesite.creator;
 
 import java.util.ArrayList;
 
-import org.trading.TraderUnit;
-import org.trading.Village;
-import org.trading.Town;
-import org.trading.City;
+import com.examplesite.trading.TraderUnit;
+import com.examplesite.trading.Village;
+import com.examplesite.trading.Town;
+import com.examplesite.trading.City;
 
 public class TraderCreator {
 

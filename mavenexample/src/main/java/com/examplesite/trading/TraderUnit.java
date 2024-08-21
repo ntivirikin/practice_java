@@ -1,4 +1,4 @@
-package org.trading;
+package com.examplesite.trading;
 
 public abstract class TraderUnit implements Trader {
 
@@ -11,14 +11,15 @@ public abstract class TraderUnit implements Trader {
     // Change these to a map of objects eventually, with own variables
     Integer priceLogs;
     Integer priceLumber;
-    Double logConvRate;
+    final Double logConvRate; // Need to initialize this in the constructor, pass it up from child classes
 
-    public TraderUnit(String initName, Integer initGold, Integer initLogs, Integer initPriceLogs, Integer initLumber) {
+    public TraderUnit(String initName, Integer initGold, Integer initLogs, Integer initPriceLogs, Integer initLumber, Double newLogConvRate) {
         name = initName;
         numGold = initGold;
         numLogs = initLogs;
         priceLogs = initPriceLogs;
         numLumber = initLumber;
+        logConvRate = newLogConvRate; // Received from child class, hardcoded
     }
 
     // Name getter
@@ -71,12 +72,6 @@ public abstract class TraderUnit implements Trader {
     @Override
     public Double getLogConvRate() {
         return this.logConvRate;
-    }
-
-    // Conversion rate log setter
-    protected void setLogConvRate(Double newLogConvRate) {
-        this.logConvRate = newLogConvRate;
-        return;
     }
 
     // Num lumber getter

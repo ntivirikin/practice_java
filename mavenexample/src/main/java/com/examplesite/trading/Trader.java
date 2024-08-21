@@ -1,4 +1,4 @@
-package org.trading;
+package com.examplesite.trading;
 
 public interface Trader {
 
