@@ -1,4 +1,4 @@
-package com.examplesite;
+package com.examplesite.runner;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,9 @@ public class Runner {
         ArrayList<TraderUnit> traders = TraderCreator.createTraders();
 
         for (TraderUnit trader : traders) {
-            trader.declareInfo();
+            if (trader != null) {
+                trader.declareInfo();
+            }
         }
     }
 }
