@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -52,44 +51,44 @@ public class TraderCreator {
         ArrayList<String> settleNames = null;
         try {
             settleNames = readSettleNames();
-        } catch(Exception e) {
+
+        // Catch two exceptions with | syntax
+        } catch(IOException|URISyntaxException e) {
             System.out.println(e.toString());
             return null;
         }
 
-        for (String settleName : settleNames) {
-            System.out.println(settleName);
-        }
-
         // Select from village names and parameters
         if (traderType == "village") {
-            Village newTrader = new Village("Colbrington", 500, 50, 3, 25);
+            Village newTrader = new Village(settleNames.get(1), 500, 50, 3, 25);
             return newTrader;
 
         } else if (traderType == "town") {
-            Town newTrader = new Town("Townsend", 500, 25, 25, 25);
+            Town newTrader = new Town(settleNames.get(3), 500, 25, 25, 25);
             return newTrader;
 
         } else if (traderType == "city") {
-            City newTrader = new City("Appleville", 1000, 100, 5, 80);
+            City newTrader = new City(settleNames.get(5), 1000, 100, 5, 80);
             return newTrader;
         }
 
+        // If reaches end, return nothing since bad input
+        // Can possibly throw an exception here
         return null;
-
     }
 
+    // Read possible settlement names from resource file
     private static ArrayList<String> readSettleNames() throws IOException, URISyntaxException {
 
+        // Create empty ArrayList to store each line of resource file
         ArrayList<String> fileLines = null;
 
-        // Path currentRelativePath = Paths.get(".\\resources\\settlementNames.txt");
-        // fileLines = new ArrayList<String>(Files.readAllLines(currentRelativePath));
-
+        // Find path to resource
         URL url = TraderCreator.class.getResource("/settlementNames.txt");
         Path settlePath = Path.of(url.toURI());
-        fileLines = new ArrayList<String>(Files.readAllLines(settlePath));
 
+        // Create array from each text file line
+        fileLines = new ArrayList<String>(Files.readAllLines(settlePath));
         return fileLines;
     }
 }

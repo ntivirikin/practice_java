@@ -19,8 +19,8 @@ public class CreatorTest {
 
         // Check names of each settlement created
         assertEquals(traders.get(0).getName(), "Colbrington");
-        assertEquals(traders.get(1).getName(), "Townsend");
-        assertEquals(traders.get(2).getName(), "Appleville");
+        assertEquals(traders.get(1).getName(), "Appleville");
+        assertEquals(traders.get(2).getName(), "Realiver");
     }
     
 }
