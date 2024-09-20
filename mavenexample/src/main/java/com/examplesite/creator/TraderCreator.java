@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import com.examplesite.trading.TraderUnit;
 import com.examplesite.trading.Village;
@@ -12,6 +14,24 @@ import com.examplesite.trading.Town;
 import com.examplesite.trading.City;
 
 public class TraderCreator {
+
+    // Main to help figure out getResource() method
+    public static void main(String... args) {
+        ArrayList<String> returnSettleNames = new ArrayList<String>();
+
+        // Attempt to acquire settlement names from resource
+        try {
+            returnSettleNames = readSettleNames();
+
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        for (String settleName : returnSettleNames) {
+            System.out.println(settleName);
+        }
+    }
 
     // Use hashmap or hashset here to easily retrieve by the name; placeholder for now
     public static ArrayList<TraderUnit> createTraders() {
@@ -32,7 +52,7 @@ public class TraderCreator {
         ArrayList<String> settleNames = null;
         try {
             settleNames = readSettleNames();
-        } catch(IOException e) {
+        } catch(Exception e) {
             System.out.println(e.toString());
             return null;
         }
@@ -59,18 +79,16 @@ public class TraderCreator {
 
     }
 
-    private static ArrayList<String> readSettleNames() throws IOException {
+    private static ArrayList<String> readSettleNames() throws IOException, URISyntaxException {
 
         ArrayList<String> fileLines = null;
 
-        Path currentRelativePath = Paths.get(".\\resources\\settlementNames.txt");
+        // Path currentRelativePath = Paths.get(".\\resources\\settlementNames.txt");
+        // fileLines = new ArrayList<String>(Files.readAllLines(currentRelativePath));
 
-        try {
-            fileLines = new ArrayList<String>(Files.readAllLines(currentRelativePath));
-        } catch(IOException ioe) {
-            System.out.println(ioe.toString());
-            throw ioe;
-        }
+        URL url = TraderCreator.class.getResource("/settlementNames.txt");
+        Path settlePath = Path.of(url.toURI());
+        fileLines = new ArrayList<String>(Files.readAllLines(settlePath));
 
         return fileLines;
     }
