@@ -1,6 +1,7 @@
 package com.examplesite.creator;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,20 +17,13 @@ public class TraderCreator {
 
     // Main to help figure out getResource() method
     public static void main(String... args) {
-        ArrayList<String> returnSettleNames = new ArrayList<String>();
 
-        // Attempt to acquire settlement names from resource
-        try {
-            returnSettleNames = readSettleNames();
+        ArrayList<TraderUnit> villList = createTraders();
 
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            return;
+        for (TraderUnit vill : villList) {
+            vill.declareInfo();
         }
 
-        for (String settleName : returnSettleNames) {
-            System.out.println(settleName);
-        }
     }
 
     // Use hashmap or hashset here to easily retrieve by the name; placeholder for now
@@ -58,17 +52,35 @@ public class TraderCreator {
             return null;
         }
 
+        // Create new Random object for value generation
+        Random randomGen = new Random();
+
         // Select from village names and parameters
         if (traderType == "village") {
-            Village newTrader = new Village(settleNames.get(1), 500, 50, 3, 25);
+            Integer settleName = randomGen.nextInt(0, 4);
+            Integer initGold = randomGen.nextInt(25, 51) * 10;
+            Integer initLogs = randomGen.nextInt(1, 11) * 10;
+            Integer initPriceLogs = randomGen.nextInt(2, 8);
+            Integer initLumber = randomGen.nextInt(1, 6) * 10;
+            Village newTrader = new Village(settleNames.get(settleName), initGold, initLogs, initPriceLogs, initLumber);
             return newTrader;
 
         } else if (traderType == "town") {
-            Town newTrader = new Town(settleNames.get(3), 500, 25, 25, 25);
+            Integer settleName = randomGen.nextInt(4, 7);
+            Integer initGold = randomGen.nextInt(55, 120) * 10;
+            Integer initLogs = randomGen.nextInt(8, 17) * 10;
+            Integer initPriceLogs = randomGen.nextInt(4, 10);
+            Integer initLumber = randomGen.nextInt(3, 10) * 10;
+            Town newTrader = new Town(settleNames.get(settleName), initGold, initLogs, initPriceLogs, initLumber);
             return newTrader;
 
         } else if (traderType == "city") {
-            City newTrader = new City(settleNames.get(5), 1000, 100, 5, 80);
+            Integer settleName = randomGen.nextInt(7, 10);
+            Integer initGold = randomGen.nextInt(10, 25) * 100;
+            Integer initLogs = randomGen.nextInt(12, 22) * 100;
+            Integer initPriceLogs = randomGen.nextInt(8, 16);
+            Integer initLumber = randomGen.nextInt(8, 22) * 10;
+            City newTrader = new City(settleNames.get(settleName), initGold, initLogs, initPriceLogs, initLumber);
             return newTrader;
         }
 
